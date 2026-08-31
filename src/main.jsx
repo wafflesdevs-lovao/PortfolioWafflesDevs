@@ -11,7 +11,7 @@ const nav = [
   ['Proyectos', 'proyectos'],
 ];
 
-const projects = [
+const projects = [ 
   {
     slug: 'el-kioskero',
     title: 'El Kioskero',
@@ -31,6 +31,11 @@ function ProjectDetail({ project }) {
     document.title = `${project.title} — WafflesDevs`;
   }, [project.title]);
 
+  const backToProjects = (event) => {
+    event.preventDefault();
+    window.location.assign('/#proyectos');
+  };
+
   return (
     <div className="project-page">
       <header className="header header--solid project-header">
@@ -38,7 +43,7 @@ function ProjectDetail({ project }) {
           <span className="brand-mark"><img src="/assets/logos/WAFLLES DEVS.png" alt="" /></span>
           <span>Waffles<span>Devs</span></span>
         </a>
-        <a className="back-link" href="/#proyectos"><ArrowLeft size={17} /> Volver a proyectos</a>
+        <a className="back-link" href="/#proyectos" onClick={backToProjects}><ArrowLeft size={17} /> <span>Volver a proyectos</span></a>
       </header>
       <main className="project-detail">
         <div className="section-label"><span>01</span> Proyecto</div>
@@ -68,8 +73,21 @@ function App() {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    if (window.location.hash) {
+      requestAnimationFrame(() => document.querySelector(window.location.hash)?.scrollIntoView());
+    }
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', open);
+    const onKeyDown = (event) => event.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.classList.remove('menu-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
 
   const close = () => setOpen(false);
 
@@ -107,16 +125,16 @@ function App() {
 
   return (
     <>
-      <header className={`header ${scrolled ? 'header--solid' : ''}`}>
+      <header className={`header ${scrolled ? 'header--solid' : ''} ${open ? 'header--menu-open' : ''}`}>
         <a className="brand" href="#inicio" onClick={close} aria-label="WafflesDevs, inicio">
           <span className="brand-mark"><img src="/assets/logos/WAFLLES DEVS.png" alt="" /></span>
           <span>Waffles<span>Devs</span></span>
         </a>
-        <nav className={open ? 'nav nav--open' : 'nav'} aria-label="Navegación principal">
+        <nav id="main-navigation" className={open ? 'nav nav--open' : 'nav'} aria-label="Navegación principal">
           {nav.map(([label, id]) => <a href={`#${id}`} onClick={close} key={id}>{label}</a>)}
           <a className="nav-cta" href="#contacto" onClick={close}>Hablemos <ArrowUpRight size={16} /></a>
         </nav>
-        <button className="menu" onClick={() => setOpen(!open)} aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open}>
+        <button className="menu" type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={open} aria-controls="main-navigation">
           {open ? <X /> : <Menu />}
         </button>
       </header>
