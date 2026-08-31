@@ -62,7 +62,7 @@ function App() {
     <>
       <header className={`header ${scrolled ? 'header--solid' : ''}`}>
         <a className="brand" href="#inicio" onClick={close} aria-label="WafflesDevs, inicio">
-          <span className="brand-mark">W</span>
+          <span className="brand-mark"><img src="/assets/logos/WAFLLES DEVS.png" alt="" /></span>
           <span>Waffles<span>Devs</span></span>
         </a>
         <nav className={open ? 'nav nav--open' : 'nav'} aria-label="Navegación principal">
@@ -91,7 +91,7 @@ function App() {
             <div className="orbit orbit--one" /><div className="orbit orbit--two" />
             <span className="code-pill pill-one">{'{ }'}</span><span className="code-pill pill-two">&lt;/&gt;</span>
             <div className="art-glow" />
-            <img src="/wafflesdevs-hero.png" alt="Tres personajes waffle programando en sus computadoras" />
+            <img src="/assets/hero/wafflesdevs-hero.png" alt="Tres personajes waffle programando en sus computadoras" />
           </div>
           <a className="scroll-cue" href="#nosotros" aria-label="Ir a quiénes somos"><span>SCROLL</span><i><ArrowDown size={16} /></i></a>
         </section>
@@ -167,7 +167,7 @@ function App() {
         </section>
       </main>
 
-      <footer><a className="brand" href="#inicio"><span className="brand-mark">W</span><span>Waffles<span>Devs</span></span></a><p>© {new Date().getFullYear()} WafflesDevs. Hecho con código y un poco de syrup.</p><a href="#inicio">Volver arriba <ArrowUpRight size={15} /></a></footer>
+      <footer><a className="brand" href="#inicio"><span className="brand-mark"><img src="/assets/logos/WAFLLES DEVS.png" alt="" /></span><span>Waffles<span>Devs</span></span></a><p>© {new Date().getFullYear()} WafflesDevs. Hecho con código y un poco de syrup.</p><a href="#inicio">Volver arriba <ArrowUpRight size={15} /></a></footer>
     </>
   );
 }
