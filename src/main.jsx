@@ -1,15 +1,62 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import emailjs from '@emailjs/browser';
-import { ArrowDown, ArrowUpRight, Braces, Check, Code2, Layers3, Mail, Menu, MousePointer2, Palette, Sparkles, X, Zap } from 'lucide-react';
+import { ArrowDown, ArrowLeft, ArrowUpRight, Braces, Check, Code2, Layers3, Mail, Menu, MousePointer2, Palette, Sparkles, X, Zap } from 'lucide-react';
 import './styles.css';
 
 const nav = [
   ['Inicio', 'inicio'],
   ['Quiénes somos', 'nosotros'],
   ['Servicios', 'servicios'],
-  ['Contacto', 'contacto'],
+  ['Proyectos', 'proyectos'],
 ];
+
+const projects = [
+  {
+    slug: 'el-kioskero',
+    title: 'El Kioskero',
+    type: 'Sistema web',
+    description: 'Sistema POS (Point of Sale) para Kiosko, con gestion de inventario y ventas. Consulta los detalles contactandonos',
+    image: '/assets/captures/elkioskero/capture1.png',
+    imageAlt: 'Pantalla de inicio de sesión del sistema El Kioskero',
+    captures: [
+      { src: '/assets/captures/elkioskero/capture1.png', alt: 'Pantalla de inicio de sesión del sistema El Kioskero' },
+      { src: '/assets/captures/elkioskero/capture2.png', alt: 'Panel principal del sistema El Kioskero' },
+    ],
+  },
+];
+
+function ProjectDetail({ project }) {
+  useEffect(() => {
+    document.title = `${project.title} — WafflesDevs`;
+  }, [project.title]);
+
+  return (
+    <div className="project-page">
+      <header className="header header--solid project-header">
+        <a className="brand" href="/#inicio" aria-label="WafflesDevs, inicio">
+          <span className="brand-mark"><img src="/assets/logos/WAFLLES DEVS.png" alt="" /></span>
+          <span>Waffles<span>Devs</span></span>
+        </a>
+        <a className="back-link" href="/#proyectos"><ArrowLeft size={17} /> Volver a proyectos</a>
+      </header>
+      <main className="project-detail">
+        <div className="section-label"><span>01</span> Proyecto</div>
+        <div className="project-detail-heading">
+          <div><p className="eyebrow"><span /> {project.type}</p><h1>{project.title}</h1></div>
+          <p>{project.description}</p>
+        </div>
+        <div className="project-gallery">
+          {project.captures.map((capture) => (
+            <figure className="project-detail-image" key={capture.src}>
+              <img src={capture.src} alt={capture.alt} />
+            </figure>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+}
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -119,14 +166,34 @@ function App() {
             <p>Podemos adaptar una solución existente a las necesidades de tu negocio o crear un producto completamente desde cero. Muy pronto vas a poder conocer todos nuestros servicios.</p>
           </div>
           <div className="service-list">
-            <article><b>01</b><span className="service-icon"><MousePointer2 /></span><h3>Diseño UI/UX</h3><span className="soon">Próximamente</span></article>
-            <article><b>02</b><span className="service-icon"><Braces /></span><h3>Desarrollo web</h3><span className="soon">Próximamente</span></article>
+            <article><b>01</b><span className="service-icon"><Braces /></span><h3>Desarrollo web</h3><a className="service-link" href="#proyectos">Ver proyectos <ArrowUpRight size={15} /></a></article>
+            <article><b>02</b><span className="service-icon"><MousePointer2 /></span><h3>Diseño UI/UX</h3><span className="soon">Próximamente</span></article>
             <article><b>03</b><span className="service-icon"><Layers3 /></span><h3>Productos digitales</h3><span className="soon">Próximamente</span></article>
           </div>
         </section>
 
+        <section className="projects section" id="proyectos">
+          <div className="projects-heading">
+            <div><div className="section-label"><span>03</span> Proyectos</div><h2>Ideas convertidas<br />en <em>productos.</em></h2></div>
+            <p>Conocé algunos de los sistemas y experiencias digitales que desarrollamos.</p>
+          </div>
+          <div className="project-grid">
+            {projects.map((project) => (
+              <article className="project-card" key={project.slug}>
+                <a className="project-image" href={`/proyectos/${project.slug}`} aria-label={`Ver detalles de ${project.title}`}>
+                  <img src={project.image} alt={project.imageAlt} />
+                </a>
+                <div className="project-card-body">
+                  <div><span className="project-type">{project.type}</span><h3>{project.title}</h3><p>{project.description}</p></div>
+                  <a className="project-arrow" href={`/proyectos/${project.slug}`} aria-label={`Ver detalles de ${project.title}`}><ArrowUpRight /></a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="process section">
-          <div className="section-label"><span>03</span> Cómo trabajamos</div>
+          <div className="section-label"><span>04</span> Cómo trabajamos</div>
           <div className="process-grid">
             <div><h2>Simple, claro<br />y <em>sin sorpresas.</em></h2><p>Un proceso transparente para avanzar juntos desde la primera idea hasta el último detalle.</p></div>
             <ol>
@@ -140,7 +207,7 @@ function App() {
 
         <section className="contact section" id="contacto">
           <div className="contact-inner">
-            <div className="section-label light"><span>04</span> Contacto</div>
+            <div className="section-label light"><span>05</span> Contacto</div>
             <h2>¿Tenés una idea?<br /><em>Hagámosla realidad.</em></h2>
             <p>Contanos qué tenés en mente y recibiremos tu mensaje directamente en nuestro correo.</p>
             <form ref={form} className="contact-form" onSubmit={sendEmail}>
@@ -172,4 +239,7 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+const projectSlug = window.location.pathname.match(/^\/proyectos\/([^/]+)\/?$/)?.[1];
+const activeProject = projects.find((project) => project.slug === projectSlug);
+
+createRoot(document.getElementById('root')).render(activeProject ? <ProjectDetail project={activeProject} /> : <App />);
