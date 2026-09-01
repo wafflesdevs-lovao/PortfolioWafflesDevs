@@ -61,9 +61,27 @@ const projects = [
 ];
 
 function ProjectDetail({ project }) {
+  const [expandedCapture, setExpandedCapture] = useState(null);
+
   useEffect(() => {
     document.title = `${project.title} — WafflesDevs`;
   }, [project.title]);
+
+  useEffect(() => {
+    if (!expandedCapture) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setExpandedCapture(null);
+    };
+
+    document.body.classList.add('lightbox-open');
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      document.body.classList.remove('lightbox-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [expandedCapture]);
 
   const backToProjects = (event) => {
     event.preventDefault();
@@ -88,7 +106,15 @@ function ProjectDetail({ project }) {
         <div className="project-gallery">
           {project.captures.map((capture) => (
             <figure className="project-detail-image" key={capture.src}>
-              <img src={capture.src} alt={capture.alt} />
+              <button
+                className="project-image-expand"
+                type="button"
+                onClick={() => setExpandedCapture(capture)}
+                aria-label={`Ampliar: ${capture.alt}`}
+              >
+                <img src={capture.src} alt={capture.alt} />
+                <span aria-hidden="true">Ampliar imagen</span>
+              </button>
               {capture.description && (
                 <figcaption>
                   {capture.title && <strong>{capture.title}</strong>}
@@ -99,6 +125,36 @@ function ProjectDetail({ project }) {
           ))}
         </div>
       </main>
+      {expandedCapture && (
+        <div
+          className="project-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Vista ampliada: ${expandedCapture.alt}`}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setExpandedCapture(null);
+          }}
+        >
+          <button
+            className="project-lightbox-close"
+            type="button"
+            onClick={() => setExpandedCapture(null)}
+            aria-label="Cerrar imagen ampliada"
+            autoFocus
+          >
+            <X />
+          </button>
+          <div className="project-lightbox-content">
+            <img src={expandedCapture.src} alt={expandedCapture.alt} />
+            {expandedCapture.description && (
+              <div className="project-lightbox-caption">
+                {expandedCapture.title && <strong>{expandedCapture.title}</strong>}
+                <p>{expandedCapture.description}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
