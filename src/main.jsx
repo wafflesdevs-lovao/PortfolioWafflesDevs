@@ -24,6 +24,40 @@ const projects = [
       { src: '/assets/captures/elkioskero/capture2.png', alt: 'Panel principal del sistema El Kioskero' },
     ],
   },
+  {
+    slug: 'distribuidorapp',
+    title: 'DistribuidorApp',
+    type: 'Sistema web',
+    description: 'Sistema de gestión de pedidos, asignación de repartidores y seguimiento de entregas.',
+    image: '/assets/captures/distribuidorapp/login.png',
+    imageAlt: 'Pantalla de inicio de sesión de DistribuidorApp',
+    captures: [
+      {
+        src: '/assets/captures/distribuidorapp/login.png',
+        alt: 'Pantalla de inicio de sesión de DistribuidorApp',
+        title: 'Inicio de sesión',
+        description: 'Podés acceder al sistema según tu perfil: cliente, administrador o repartidor.',
+      },
+      {
+        src: '/assets/captures/distribuidorapp/cliente.png',
+        alt: 'Panel de cliente de DistribuidorApp',
+        title: 'Cliente',
+        description: 'Como cliente, podés pedir uno o varios productos y hacer el seguimiento de tu pedido.',
+      },
+      {
+        src: '/assets/captures/distribuidorapp/admin.png',
+        alt: 'Panel de administración de DistribuidorApp',
+        title: 'Administrador',
+        description: 'Como administrador, podés gestionar los pedidos y asignarlos a los repartidores.',
+      },
+      {
+        src: '/assets/captures/distribuidorapp/repartidor.png',
+        alt: 'Panel de repartidor de DistribuidorApp',
+        title: 'Repartidor',
+        description: 'Como repartidor, podés seguir la ruta de los pedidos pendientes y actualizar el estado de cada entrega.',
+      },
+    ],
+  },
 ];
 
 function ProjectDetail({ project }) {
@@ -55,6 +89,12 @@ function ProjectDetail({ project }) {
           {project.captures.map((capture) => (
             <figure className="project-detail-image" key={capture.src}>
               <img src={capture.src} alt={capture.alt} />
+              {capture.description && (
+                <figcaption>
+                  {capture.title && <strong>{capture.title}</strong>}
+                  <p>{capture.description}</p>
+                </figcaption>
+              )}
             </figure>
           ))}
         </div>
