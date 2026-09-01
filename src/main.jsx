@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import emailjs from '@emailjs/browser';
 import { ArrowDown, ArrowLeft, ArrowUpRight, Braces, Check, Code2, Layers3, Mail, Menu, MousePointer2, Palette, Sparkles, X, Zap } from 'lucide-react';
 import './styles.css';
-
+ 
 const nav = [
   ['Inicio', 'inicio'],
   ['Quiénes somos', 'nosotros'],
