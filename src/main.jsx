@@ -29,11 +29,11 @@ const projects = [
     title: 'DistribuidorApp',
     type: 'Sistema web',
     description: 'Sistema de gestión de pedidos, asignación de repartidores y seguimiento de entregas.',
-    image: '/assets/captures/distribuidorapp/login.png',
+    image: '/assets/captures/distribuidorapp/login.png?v=2',
     imageAlt: 'Pantalla de inicio de sesión de DistribuidorApp',
     captures: [
       {
-        src: '/assets/captures/distribuidorapp/login.png',
+        src: '/assets/captures/distribuidorapp/login.png?v=2',
         alt: 'Pantalla de inicio de sesión de DistribuidorApp',
         title: 'Inicio de sesión',
         description: 'Podés acceder al sistema según tu perfil: cliente, administrador o repartidor.',
