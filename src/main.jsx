@@ -21,7 +21,8 @@ const projects = [
     imageAlt: 'Pantalla de inicio de sesión del sistema El Kioskero',
     captures: [
       { src: '/assets/captures/elkioskero/capture1.png', alt: 'Pantalla de inicio de sesión del sistema El Kioskero' },
-      { src: '/assets/captures/elkioskero/capture2.png', alt: 'Panel principal del sistema El Kioskero' },
+      { src: '/assets/captures/elkioskero/capture2.png', alt: 'Pantalla de registro del sistema El Kioskero' },
+      { src: '/assets/captures/elkioskero/capture3.png', alt: 'Panel principal del sistema El Kioskero' },
     ],
   },
   {
