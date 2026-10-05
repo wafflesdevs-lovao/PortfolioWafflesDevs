@@ -1,3 +1,5 @@
+// main.jsx
+
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import emailjs from '@emailjs/browser';
@@ -55,6 +57,52 @@ const projects = [
         alt: 'Panel de repartidor de DistribuidorApp',
         title: 'Repartidor',
         description: 'Como repartidor, podés seguir la ruta de los pedidos pendientes y actualizar el estado de cada entrega.',
+      },
+    ],
+  },
+    {
+    slug: 'gym-multiespacio',
+    title: 'Gym Multiespacio',
+    type: 'Sistema web',
+    description: 'Sistema integral para gimnasios y espacios deportivos: actividades, reservas de salones, pagos y reportes.',
+    image: '/assets/captures/gym/06_landing.png',
+    imageAlt: 'Página de inicio pública de Gym Multiespacio',
+    captures: [
+      {
+        src: '/assets/captures/gym/06_landing.png',
+        alt: 'Página de inicio pública de Gym Multiespacio',
+        title: 'Página pública',
+        description: 'Una web de presentación donde los visitantes ven las actividades de la semana y pueden reservar un espacio.',
+      },
+      {
+        src: '/assets/captures/gym/01_login.png',
+        alt: 'Pantalla de inicio de sesión de Gym Multiespacio',
+        title: 'Inicio de sesión',
+        description: 'Acceso seguro al sistema con correo y contraseña, con opción de recuperar la cuenta o registrarse.',
+      },
+      {
+        src: '/assets/captures/gym/02_dashboard.png',
+        alt: 'Dashboard de Gym Multiespacio',
+        title: 'Dashboard',
+        description: 'Resumen del gimnasio en una sola vista: usuarios activos, reservas del día, ingresos del mes y próximas actividades.',
+      },
+      {
+        src: '/assets/captures/gym/03_actividades.png',
+        alt: 'Cronograma semanal de actividades de Gym Multiespacio',
+        title: 'Actividades',
+        description: 'Cronograma semanal de clases y profesores, con la posibilidad de agregar nuevas actividades.',
+      },
+      {
+        src: '/assets/captures/gym/04_reservas.png',
+        alt: 'Calendario de reservas de salones de Gym Multiespacio',
+        title: 'Alquileres y reservas',
+        description: 'Calendario de disponibilidad por salón, con el estado de cada reserva (pagado, seña) para evitar superposiciones.',
+      },
+      {
+        src: '/assets/captures/gym/05_pagos.png',
+        alt: 'Pantalla de caja y pagos de Gym Multiespacio',
+        title: 'Caja y pagos',
+        description: 'Registro de cobros de cuotas, alquileres y clases, con historial de caja y estado de cada pago.',
       },
     ],
   },
